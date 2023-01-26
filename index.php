@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 
 <?php
+include_once __DIR__ . '/partials/functions.php';
+
     $characters = '0123456789abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\|!£$%&/=?@#-_.,*§';
-
     $pswLength = $_GET['psw-length'];
-
-    if (isset($pswLength)) {
-        function getNewPassword($characters, $passwordLength) {
-            $newPassword = '';
-
-            for ($i=0; $i < $passwordLength; $i++) { 
-                $randomNum = rand(1, strlen($characters));
-
-                $newPassword .= $characters[$randomNum];
-            }
-            return $newPassword;
-        }
-    }
 ?>
 
 <html lang="en">
@@ -36,7 +24,9 @@
 
             <pre>
                 <?php
-                    echo getNewPassword($characters, $pswLength);
+                    if (isset($pswLength)) {
+                        echo getNewPassword($characters, $pswLength);
+                    }
                 ?>
             </pre>
         </main>
