@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <?php
-include_once __DIR__ . '/partials/functions.php';
+    session_start();
+
+    include_once __DIR__ . '/partials/functions.php';
 
     $characters = '0123456789abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\|!£$%&/=?@#-_.,*§';
     $pswLength = $_GET['psw-length'];
@@ -22,13 +24,14 @@ include_once __DIR__ . '/partials/functions.php';
                 <button type="submit">invia</button>
             </form>
 
-            <pre>
-                <?php
-                    if (isset($pswLength)) {
-                        echo getNewPassword($characters, $pswLength);
-                    }
-                ?>
-            </pre>
+            <?php
+                $_SESSION['generatedPassword'] = getNewPassword($characters, $pswLength);
+
+                if (isset($pswLength)) {
+                    header('Location: ./result.php');
+                }
+            ?>
+
         </main>
     </body>
 </html>
